@@ -6,11 +6,15 @@ data "template_file" "user_data" {
   template = "${file("${path.module}/cassandra.sh.tpl")}"
 
   vars {
-    ephemeral_disk_device = "${var.ephemeral_disk_device}"
-    cassandra_seed_ips = "${join(",", var.cassandra_seed_ips)}"
-    cassandra_cluster_name = "${var.cassandra_cluster_name}"
-    private_ip = "${element(var.cassandra_seed_ips, count.index)}"
-    node_index = "${count.index}"
+    ephemeral_disk_device       = "${var.ephemeral_disk_device}"
+    cassandra_seed_ips          = "${join(",", var.cassandra_seed_ips)}"
+    cassandra_cluster_name      = "${var.cassandra_cluster_name}"
+    private_ip                  = "${element(var.cassandra_seed_ips, count.index)}"
+    node_index                  = "${count.index}"
+    s3_bucket_name              = "${var.ssh_key_s3_bucket}"
+    ssh_user                    = "${var.ssh_user}"
+    keys_update_frequency       = "${var.keys_update_frequency}"
+    enable_hourly_cron_updates  = "${var.enable_hourly_cron_updates}"
   }
 }
 

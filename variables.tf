@@ -8,3 +8,7 @@ variable vpc_cidr { }
 variable ephemeral_disk_device { default = "/dev/xvdh" }
 variable cassandra_cluster_name { }
 variable depends_id { }
+variable ssh_key_s3_bucket { }
+variable ssh_user { default = "ubuntu" }
+variable enable_hourly_cron_updates { default = "false" }
+variable keys_update_frequency { default = "" }
