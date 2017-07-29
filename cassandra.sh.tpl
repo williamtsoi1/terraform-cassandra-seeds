@@ -47,7 +47,8 @@ sed -i "s/# broadcast_rpc_address: 1.2.3.4/broadcast_rpc_address: ${private_ip}/
 service cassandra start
 
 
-# Set up SSH keys
+# Set up SSH keys for remote access
+pip install awscli
 cat <<"EOF" > /home/${ssh_user}/update_ssh_authorized_keys.sh
 #!/usr/bin/env bash
 set -e

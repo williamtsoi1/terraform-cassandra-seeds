@@ -28,6 +28,7 @@ resource "aws_instance" "cassandra" {
   instance_type = "${var.instance_type}"
   ami = "${data.aws_ami.ubuntu.id}"
   key_name = "${aws_key_pair.cassandra.key_name}"
+  iam_instance_profile        = "${aws_iam_instance_profile.cassandra.id}"
   private_ip = "${element(var.cassandra_seed_ips, count.index)}"
   subnet_id = "${element(var.private_subnet_ids, count.index)}"
   user_data = "${element(data.template_file.user_data.*.rendered, count.index)}"
