@@ -47,3 +47,11 @@ resource "aws_instance" "cassandra" {
     Depends_id = "${var.depends_id}"
   }
 }
+
+resource "aws_route53_record" "cassandra" {
+  zone_id = "${var.r53_zone_id}"
+  name    = "${var.cassandra_subdomain}.${var.r53_domain}"
+  type    = "A"
+  ttl     = "3600"
+  records = ["${var.cassandra_seed_ips}"]
+}
