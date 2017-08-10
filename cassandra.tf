@@ -18,16 +18,10 @@ data "template_file" "user_data" {
   }
 }
 
-resource "aws_key_pair" "cassandra" {
-  public_key = "${var.ssh_public_key}"
-  key_name = "cassandra_${var.cassandra_cluster_name}_ssh_key"
-}
-
 resource "aws_instance" "cassandra" {
   count = "${var.number_of_seeds}"
   instance_type = "${var.instance_type}"
   ami = "${data.aws_ami.ubuntu.id}"
-  key_name = "${aws_key_pair.cassandra.key_name}"
   iam_instance_profile        = "${aws_iam_instance_profile.cassandra.id}"
   private_ip = "${element(var.cassandra_seed_ips, count.index)}"
   subnet_id = "${element(var.private_subnet_ids, count.index)}"
